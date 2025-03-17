@@ -1,0 +1,28 @@
+# encoding: utf-8
+
+<% def timestamps
+  date = Time.now.strftime('%Y%m%d').to_s
+  time = Time.now.strftime('%H-%M-%S').to_s
+  "#{date}_#{time}"
+end %>
+
+<% RUN_TSTAMPs = timestamps.freeze %>
+
+# Profiles
+api_user: --publish-quiet -p html_report -p json_report -p user_router -p report_builder
+default_preprod: --publish-quiet -p html_report -p json_report -p pre_prod -p report_builder
+default_hml: --publish-quiet -p html_report -p json_report -p hmg -p report_builder
+
+# APIS
+user_router: ENVIRONMENT="hml"
+
+# Environments
+hml: ENVIRONMENT="hml"
+
+# Cucumber reporters
+html_report: --format pretty --format html --out=reports/features_report_<%= RUN_TSTAMPs %>.html
+json_report: --format pretty --format json --out=reports/features_report_<%= RUN_TSTAMPs %>.json
+message_report: --format pretty --format message --out=reports/message_report.ndjson
+
+# Custom Reporters
+report_builder: REPORTBUILDER=true

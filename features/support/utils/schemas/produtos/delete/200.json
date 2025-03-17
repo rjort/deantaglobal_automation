@@ -1,0 +1,14 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "message": {
+      "type": "string",
+      "enum": [
+        "Registro excluído com sucesso",
+        "Nenhum registro excluído"
+      ]
+    }
+  },
+  "required": ["message"]
+}

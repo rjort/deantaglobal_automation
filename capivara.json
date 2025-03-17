@@ -1,0 +1,11 @@
+{
+  "project_root_path": "deantaglobal_at_backend",
+  "project_name": "Deantaglobal_at_backend",
+  "features_path": "features",
+  "json_path": "capivara.json",
+  "project_schema": "default_back",
+  "pages_path": "features/services",
+  "steps_path": "features/step_definitions",
+  "gherkin_path": "features/specs",
+  "section_path": "features/services/sections"
+}

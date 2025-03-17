@@ -1,28 +1,27 @@
-#language: pt
 
 @ALL
 @Login
 @products
-Funcionalidade: Produtos
+Feature: Produtos
 
 @put
 @update_product
 @DELETE_PRODUCT
-Cenario: Atualizar um produto
-Dado tenha um produto cadastrado
-Quando realizar a requisição "put" para "/produtos/{id}" na rota de produtos
-Entao deve retornar o schema de produtos em "produtos/put" e o status code "200"
+Scenario: Update a product
+  Given there is a registered product
+  When making a "put" request to "/produtos/{id}" on the products route
+  Then it should return the products schema in "produtos/put" and the status code "200"
 
 @delete
 @delete_product
-Cenario: Deletar um produto
-Dado tenha um produto cadastrado
-Quando realizar a requisição "delete" para "/produtos/{id}" na rota de produtos
-Entao deve retornar o schema de produtos em "produtos/delete" e o status code "200"
+Scenario: Delete a product
+Given there is a registered product
+When making a "delete" request to "/produtos/{id}" on the products route
+Then it should return the products schema in "produtos/delete" and the status code "200"
 
-@delete
 @delete_not_exists
-Cenario: Deletar um produto que não existe
-Dado tenha um id que não existe
-Quando realizar a requisição "delete" para "/produtos/{id}" na rota de produtos
-Entao deve retornar o schema de produtos em "produtos/delete" e o status code "200"
+@delete
+Scenario: Delete a product that does not exist
+Given that there is an id that does not exist
+When making a "delete" request to "/produtos/{id}" on the products route
+Then it should return the products schema in "produtos/delete" and the status code "200"

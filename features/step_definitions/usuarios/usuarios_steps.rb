@@ -1,4 +1,4 @@
-Dado('tenha os parametros {string}, {string}, {string} preenchidos com dados validos') do |nome, email, password|
+Given('the parameters {string}, {string}, {string} are filled with valid data') do |nome, email, password|
   @params = {
     nome.to_sym => "Reuter Regis Sobrinho",
     email.to_sym => "reuter_junior@hotmail.com",
@@ -6,18 +6,18 @@ Dado('tenha os parametros {string}, {string}, {string} preenchidos com dados val
   }
 end
 
-Dado('tenha um usuario cadastrado') do
-  step('tenha os parametros "nome", "email", "password" preenchidos com dados validos')
-  step('tenha o parametro "administrador" setado como "false"')
-  step('realizar a requisição "post" para "/usuarios"')
+Given('there is a registered user') do
+  step('the parameters "nome", "email", "password" are filled with valid data')
+  step('the parameter "administrador" is set to "false"')
+  step('making a "post" request to "/usuarios"')
 end
 
-Dado('realize novamente o mesmo cadastro para o mesmo usuario') do
-  step('tenha os parametros "nome", "email", "password" preenchidos com dados validos')
-  step('tenha o parametro "administrador" setado como "false"')
+Given('the same registration is made for the same user again') do
+  step('the parameters "nome", "email", "password" are filled with valid data')
+  step('the parameter "administrador" is set to "false"')
 end
 
-Dado('tenha o parametro {string} setado como {string}') do |admin, value|
+Given('the parameter {string} is set to {string}') do |admin, value|
   case value
   when 'true'
     @params[admin.to_sym] = value
@@ -28,11 +28,11 @@ Dado('tenha o parametro {string} setado como {string}') do |admin, value|
   end
 end
 
-Dado('busque por um id de usuario cadastrado') do
+Given('fetch a registered user by id') do
   @id = @response.parsed_response['_id']
 end
 
-Quando('realizar a requisição {string} para {string}') do |method, endpoint|
+When('making a {string} request to {string}') do |method, endpoint|
   case method
   when 'post'
     @response = @user.send("#{method}_create_user", endpoint, @params)
@@ -46,14 +46,15 @@ Quando('realizar a requisição {string} para {string}') do |method, endpoint|
   p @response
 end
 
-Quando("realizar a requisição {string} para buscar um usuario por id na rota {string}") do |method, endpoint|
-  step('busque por um id de usuario cadastrado')
+When("making a {string} request to fetch a user by id on the route {string}") do |method, endpoint|
+  step('fetch a registered user by id')
+
   endpoint_id = endpoint.gsub('{id}', @id)
   p endpoint_id
   @response = @user.send("#{method}_user_by_id", endpoint_id)
 end
 
-Então('deve retornar o schema {string} e o status code {string}') do |schema, status|
+Then('it should return the schema {string} and the status code {string}') do |schema, status|
   schema = Utils.get_schema schema, status
   aggregate_failures 'Validating status code and schemas' do
     expect(@response.code).to eq status.to_i

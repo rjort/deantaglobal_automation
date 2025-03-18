@@ -9,7 +9,7 @@ end %>
 <% RUN_TSTAMPs = timestamps.freeze %>
 
 # Profiles
-api_user: --publish-quiet -p html_report -p json_report -p user_router -p report_builder
+api_serverest: --publish-quiet -p html_report -p json_report -p user_router -p report_builder
 default_preprod: --publish-quiet -p html_report -p json_report -p pre_prod -p report_builder
 default_hml: --publish-quiet -p html_report -p json_report -p hmg -p report_builder
 

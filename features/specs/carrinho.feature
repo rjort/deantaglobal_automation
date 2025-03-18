@@ -1,34 +1,30 @@
-#language: pt
 
-@ALL
 @cart
-Funcionalidade: Carrinho
+Feature: Carrinho
 
 @post
 @add_product_to_cart
-Cenario: Adicionar um produto ao carrinho
-Dado tenha um produto cadastrado
-E realize uma requisição "post" para "/carrinho"
-Quando realizar a requisição "post" para "/carrinho"
-Entao deve retornar o schema "carrinho/post" e o status code "200"
+Scenario: Add a product to the cart  
+Given there is a registered product  
+When making a "post" request to "/carrinho" on the cart route  
+Then it should return the cart schema in "carrinho/post" and the status code "200"
 
 @get
 @get_cart
-Cenario: Buscar carrinho
-Quando realizar a requisição "get" para "/carrinho"
-Entao deve retornar o schema "carrinho/get" e o status code "200"
+Scenario: Retrieve cart  
+When making a "get" request to "/carrinho"  
+Then it should return the cart schema in "carrinho/get" and the status code "200"
 
 @delete
 @cart_complete
-Cenario: Concluir carrinho
-Dado tenha um carrinho cadastrado com produtos
-E realize uma requisição "delete" para "/carrinhos/concluir-compra"
-Quando realizar a requisição "delete" para "/carrinho"
-Entao deve retornar o schema "carrinho/delete" e o status code "200"
+Scenario: Complete cart  
+Given there is a registered cart with products  
+When making a "delete" request is made to "/carrinhos/concluir-compra"  
+Then it should return the cart schema in "carrinho/delete" and the status code "200"
 
 @delete
 @cart_cancel
-Cenario: Cancelar carrinho
-Dado tenha um carrinho cadastrado com produtos
-E realize uma requisição "delete" para "/carrinhos/cancelar-compra"
-Quando realizar a requisição "delete" para "/carrinho"
+Scenario: Cancel cart  
+Given there is a registered cart with products  
+When making a "delete" request to "/carrinhos/cancelar-compra"  
+Then it should return the cart schema in "carrinho/delete" and the status code "200"
